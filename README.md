@@ -1,7 +1,17 @@
-# LibSodium crypto_box_seal in Go
+# SodiumBox LibSodium crypto_box_seal in Go
 
-Native library for interacting with libsodiums crypto_box_seal
+Pure go library for interacting with libsodiums crypto_box_seal
+
+## Install
+
+`go get github.com/mdp/sodium-box`
+
+## Test
+
+```
+cd $GOHOME/src/github.com/mdp/sodium-box
+go test -v
+```
 
 ### License: MIT
-
 
