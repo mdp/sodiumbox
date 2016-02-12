@@ -43,24 +43,24 @@ func getTestKeyPair() *keyPair {
 
 func TestSeal(t *testing.T) {
 	testKeyPair := getTestKeyPair()
-	box, err := Seal([]byte("message"), &testKeyPair.publicKey)
-	t.Logf("Encrypted Message for PubKey (%s)\n%s\n", recipientPubKey, hex.EncodeToString(*box))
+	sealedMsg, err := Seal([]byte("secretmessage"), &testKeyPair.publicKey)
+	t.Logf("Encrypted Message for PubKey (%s)\n%s\n", recipientPubKey, hex.EncodeToString(sealedMsg.Box))
 	checkErr(t, err)
 }
 
 func TestSealOpen(t *testing.T) {
 	testKeyPair := getTestKeyPair()
-	enc, err := Seal([]byte("message"), &testKeyPair.publicKey)
-	t.Logf("Encrypted Message for PubKey (%s)\n%s\n", recipientPubKey, hex.EncodeToString(*enc))
+	sealedMsg, err := Seal([]byte("message"), &testKeyPair.publicKey)
+	t.Logf("Encrypted Message for PubKey (%s)\n%s\n", recipientPubKey, hex.EncodeToString(sealedMsg.Box))
 	if checkErr(t, err) {
 		return
 	}
-	decoded, err := SealOpen(*enc, &testKeyPair.publicKey, &testKeyPair.secretKey)
+	msg, err := SealOpen(sealedMsg.Box, &testKeyPair.publicKey, &testKeyPair.secretKey)
 	if checkErr(t, err) {
 		return
 	}
-	if string(*decoded) != "message" {
-		t.Logf("%v", decoded)
+	if string(msg.Content) != "message" {
+		t.Logf("%+v", msg)
 		t.Fail()
 	}
 }

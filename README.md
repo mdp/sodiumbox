@@ -4,12 +4,12 @@ Pure go library for interacting with libsodiums crypto_box_seal
 
 ## Install
 
-`go get github.com/mdp/sodium-box`
+`go get github.com/mdp/sodiumbox`
 
 ## Test
 
 ```
-cd $GOHOME/src/github.com/mdp/sodium-box
+cd $GOHOME/src/github.com/mdp/sodiumbox
 go test -v
 ```
 
